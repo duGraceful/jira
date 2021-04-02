@@ -1,6 +1,20 @@
 import React from 'react';
+import { User } from './search-panel';
 
-export const List = ({ list, users }) => {
+interface Project {
+    id: string,
+    name: string,
+    personId: string,
+    pin: Boolean,
+    origanization: string,
+}
+
+interface ListProps {
+    list: Project[],
+    users: User[],
+}
+
+export const List = ({ list, users }: ListProps) => {
     return <table>
         <thead>
             <tr>
@@ -12,7 +26,7 @@ export const List = ({ list, users }) => {
             {
                 list.map((project, index) => (
                     <tr key={index}>
-                        <td>{project.name}</td>
+                        <td>{project?.name}</td>
                         <td>{users.find(user => user.id === project.personId)?.name || '未知'}</td>
                     </tr>
                 ))
