@@ -1,4 +1,5 @@
 import React, { FormEvent } from 'react';
+import { useAuth } from 'context/auth-context';
 
 // interface Base {
 //     id: number
@@ -8,26 +9,12 @@ import React, { FormEvent } from 'react';
 // }
 // const p: Person = { name: '123', id: 123 };
 
-const apiUrl = process.env.REACT_APP_API_URL;
-
 
 // 鸭子类型：面向接口编程，不是面向对象编程
 export const LoginScreen = () => {
 
-    const login = (param: {username: string, password: string}) => {
-        fetch(`${apiUrl}/login`, {
-        // fetch(`${apiUrl}/register`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(param)
-        }).then(async response => {
-            if (response.ok) {
-            }
-        })
-    }
-
+ 
+    const { login } = useAuth();
     // HTMLFormElement extends Element
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -45,7 +32,7 @@ export const LoginScreen = () => {
                 <label htmlFor="password">密码</label>
                 <input type="password" id={"password"} />
             </div>
-            <button type="submit">注册</button>
+            <button type="submit">登录</button>
         </form>
     )
 }

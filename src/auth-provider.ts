@@ -29,7 +29,7 @@ export const login = (data: { username: string, password: string }) => {
 };
 
 export const register = (data: { username: string, password: string }) => {
-        fetch(`${apiUrl}/register`, {
+    return fetch(`${apiUrl}/register`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -38,8 +38,10 @@ export const register = (data: { username: string, password: string }) => {
         }).then(async response => {
             if (response.ok) {
                 return handleUserResponse(await response.json())
+            } else {
+                return  Promise.reject(data)
             }
         })
 };
 
-export const loginout = () => window.localStorage.removeItem(localStorageKey);
+export const logout = async () => window.localStorage.removeItem(localStorageKey);
