@@ -1,19 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import reportWebVitals from "./reportWebVitals";
 import { loadDevTools } from "jira-dev-tool";
-import { AppProviders } from 'context/index'
+import { AppProviders } from "context/index";
+import App from "./App";
+import "antd/dist/antd.less";
+import "./index.css";
 
-loadDevTools(() => ReactDOM.render(
-  <React.StrictMode>
-    <AppProviders>
+loadDevTools(() =>
+  ReactDOM.render(
+    <React.StrictMode>
+      <AppProviders>
         <App />
-    </AppProviders>
-  </React.StrictMode>,
-  document.getElementById('root')
-));
+      </AppProviders>
+    </React.StrictMode>,
+    document.getElementById("root")
+  )
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

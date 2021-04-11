@@ -1,5 +1,7 @@
-import React, { FormEvent } from 'react';
-import { useAuth } from 'context/auth-context';
+import React from "react";
+import { useAuth } from "context/auth-context";
+import { Form, Input } from "antd";
+import { LongButton } from "./index";
 
 // interface Base {
 //     id: number
@@ -9,30 +11,42 @@ import { useAuth } from 'context/auth-context';
 // }
 // const p: Person = { name: '123', id: 123 };
 
-
 // 鸭子类型：面向接口编程，不是面向对象编程
 export const LoginScreen = () => {
+  const { login } = useAuth();
 
- 
-    const { login } = useAuth();
-    // HTMLFormElement extends Element
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const username = (event.currentTarget.elements[0] as HTMLFormElement).value
-        const password = (event.currentTarget.elements[1] as HTMLFormElement).value
-        login({ username, password });
-    }
-    return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="username">用户名</label>
-                <input type="text" id={"username"} />
-            </div>
-            <div>
-                <label htmlFor="password">密码</label>
-                <input type="password" id={"password"} />
-            </div>
-            <button type="submit">登录</button>
-        </form>
-    )
-}
+  const handleSubmit = (values: { username: string; password: string }) => {
+    login(values);
+  };
+  return (
+    <Form onFinish={handleSubmit}>
+      <Form.Item
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: "请输入用户名",
+          },
+        ]}
+      >
+        <Input placeholder="用户名" id="username" type="text" />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: "请输入密码",
+          },
+        ]}
+      >
+        <Input placeholder="密码" id="password" type="password" />
+      </Form.Item>
+      <Form.Item>
+        <LongButton htmlType="submit" type="primary">
+          登录
+        </LongButton>
+      </Form.Item>
+    </Form>
+  );
+};
